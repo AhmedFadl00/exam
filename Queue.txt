@@ -1,0 +1,120 @@
+#include<iostream>
+using namespace std;
+#include<stdio.h>
+#define SIZE 10
+int a[SIZE], front=-1,rear=-1;
+//add items
+void enqueue (int data)
+{
+	if (rear==(SIZE-1))
+    {
+		cout<<"\n Queue is over flow\n";
+return;
+    }
+rear++;
+a[rear]=data;
+if(front==-1)
+front++;
+}
+//delete items
+void dequeue()
+{
+	if (front==-1)
+	{
+		cout<<"\nQueue is empty \n";
+		return;
+	}
+
+	cout<<"\nthe deleted element from queue is : "<<a[front];
+	if (front==rear)
+		front=rear=-1;
+	else
+		front++;
+}
+//search an item
+int search(int key)
+{ int i;
+	if(front==-1)
+	{
+		cout<<"queue is empty";
+		return -1;
+	}
+	for ( i=front; i<=rear; i++)
+		if(a[i]==key)
+			return i; // index of key 
+	return -1;
+}
+//calc size 
+int size()
+{
+	if (front==-1)
+		return 0;
+	else 
+		return rear-front+1;
+}
+//find max
+void maximum()
+{
+	int max ,pos ,i;
+if (front==-1)
+{
+	cout<<"\n Queue is empty";
+	return;
+}
+max = a[front];
+pos = front;
+for(i=front;i<=rear;i++)
+if (a[i]>max)
+{
+	   max=a[i];
+	   pos=i;
+}  
+cout<<"\n the max value in queue is :"<<max<<"and its position (index) is:"<<pos<<endl;
+}
+//print
+void display()
+{
+	if (front=-1)
+	{ cout<<"\n QUeue is empty";
+	return ;
+	}
+cout<<"\n the elemets of Queue are :";
+	for(int i=front;i<=rear;i++)
+		cout<<a[i]<<"/t";
+}
+int main()
+{
+	int ch, index ,key, item , nsize , data;
+	cout<<"\n 1.Enqueue \n 2.Dequeue \n 3.Size \n 4.Search \n 5.Maximum \n 6.Exit \n";
+	do{
+		cout<<"/n Enter your choice :" ;
+		cin>>ch;
+switch(ch)
+{
+case 1: cout<<"/n enter element to be add to queue :";
+	cin >>data;
+	enqueue(data);
+	display();
+	break;
+case 2: dequeue();
+        display();
+    break;
+case 3: nsize=size();
+	cout<<"/n the size (no.of elements) in queue is :"<<nsize;
+    break;
+case 4: cout<<"/n Enter the item (key) to be searched in queue :/n";
+			cin>>key;
+	index=search(key);
+	if (index>=0)
+		cout<<"/n the element "<<key<<"is found in queue ";
+	break;
+case 5: maximum();
+	break;
+case 6: exit(0);
+	break;
+default: cout <<"/n Invaild choice./n";
+}
+	}while(ch!=6);
+	return 0;
+}
+     
